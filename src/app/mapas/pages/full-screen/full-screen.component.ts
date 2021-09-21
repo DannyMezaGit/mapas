@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-full-screen',
@@ -21,11 +20,11 @@ export class FullScreenComponent implements OnInit {
 
   ngOnInit(): void {
 
-    (mapboxgl as any).accessToken = environment.mapboxToken;
-
     var map = new mapboxgl.Map({
       container: 'mapa',
-      style: 'mapbox://styles/mapbox/streets-v11'
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [ -109.93178353150681, 27.48371843025329 ],
+      zoom: 13
     });
 
   }
