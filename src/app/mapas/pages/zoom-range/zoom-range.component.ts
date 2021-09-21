@@ -21,6 +21,7 @@ import * as mapboxgl from 'mapbox-gl';
         bottom: 50px;
         left: 50px;
         padding: 10px;
+        width: 400px;
 
         position: fixed;
         z-index: 999;
@@ -33,14 +34,26 @@ export class ZoomRangeComponent implements AfterViewInit {
   @ViewChild('mapa') divMapa!: ElementRef;
 
   mapa!: mapboxgl.Map;
+
+  zoomLevel: number = 13;
+
   constructor() { }
   ngAfterViewInit(): void {
     this.mapa = new mapboxgl.Map({
       container: this.divMapa.nativeElement,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [ -109.93178353150681, 27.48371843025329 ],
-      zoom: 13
+      zoom: this.zoomLevel
     });
+
+    this.mapa.on('zoom', () => this.zoomLevel = this.mapa.getZoom());
+
+    this.mapa.on('zoomend', () => {
+      if (this.mapa.getZoom() > 18) {
+        this.mapa.zoomTo( 18 );
+      }
+    });
+
   }
 
   zoomOut() {
@@ -51,4 +64,7 @@ export class ZoomRangeComponent implements AfterViewInit {
     this.mapa.zoomIn();
   }
 
+  zoomCambio(val: string) {
+    this.mapa.zoomTo(Number(val));
+  }
 }
