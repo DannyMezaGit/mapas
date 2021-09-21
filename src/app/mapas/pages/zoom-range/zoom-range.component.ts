@@ -10,11 +10,21 @@ import * as mapboxgl from 'mapbox-gl';
   templateUrl: './zoom-range.component.html',
   styles: [
     `
-      #mapa{
+      .mapa-container{
         width: 100%;
         height: 100%;
       }
 
+      .row {
+        background-color: white;
+        border-radius: 5px;
+        bottom: 50px;
+        left: 50px;
+        padding: 10px;
+
+        position: fixed;
+        z-index: 999;
+      }
   `
   ]
 })
